@@ -33,4 +33,4 @@ def configure(application):
     get('authorization')
 
     # Apply configuration.
-    armet.use(store)
+    armet.use(**store)
