@@ -14,12 +14,11 @@ def _get_config(store, application, key, default=None):
 
 
 def configure(application):
-
     # Gather configuration from the application config.
     store = {}
     get = partial(_get_config, store, application)
     get('debug', default=False)
-    connector = 'alchemist.ext.armet'
+    connector = 'alchemist_armet'
     get('connectors', default={'http': connector, 'model': connector})
     get('trailing_slash', default=True)
     get('http_exposed_headers')
