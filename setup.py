@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import setup, find_packages
 from imp import load_source
 import sys
 
@@ -31,7 +31,7 @@ setup(
     author='Concordus Applications',
     author_email='support@concordusapps.com',
     url='http://github.com/concordusapps/alchemist-armet',
-    packages=['alchemist_armet'],
+    packages=find_packages('.'),
     install_requires=[
         'alchemist >= 0.3.0',
         'armet >= 0.4.0'
