@@ -23,14 +23,14 @@ class Resource(flask_resources.Resource):
             result = utils.super(Resource, self).route(*args, **kwargs)
 
             # Commit the session.
-            db.commit()
+            db.session.commit()
 
             # Return the result.
             return result
 
         except:
             # Something occurred; rollback the session.
-            db.rollback()
+            db.session.rollback()
 
             # Re-raise the exception.
             raise
