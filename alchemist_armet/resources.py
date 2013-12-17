@@ -2,7 +2,6 @@
 from __future__ import unicode_literals, absolute_import, division
 from armet.connectors.flask import resources as flask_resources
 from armet.connectors.sqlalchemy import resources as sqlalchemy_resources
-from armet import utils
 from alchemist import db
 
 __all__ = [
@@ -20,7 +19,7 @@ class Resource(flask_resources.Resource):
     def route(self, *args, **kwargs):
         try:
             # Continue on with the cycle.
-            result = utils.super(Resource, self).route(*args, **kwargs)
+            result = super(Resource, self).route(*args, **kwargs)
 
             # Commit the session.
             db.session.commit()
@@ -36,8 +35,12 @@ class Resource(flask_resources.Resource):
             raise
 
 
-class ModelResource(sqlalchemy_resources.ModelResource):
+class ModelResourceOptions(object):
 
-    def route(self, *args, **kwargs):
-        return utils.super(sqlalchemy_resources.ModelResource, self).route(
-            *args, **kwargs)
+    def __init__(self, meta, name, bases):
+        #! SQLAlchemy session used to perform operations on the models.
+        self.Session = db.session
+
+
+class ModelResource(sqlalchemy_resources.ModelResource):
+    pass
